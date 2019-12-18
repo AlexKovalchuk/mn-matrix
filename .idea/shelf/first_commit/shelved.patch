@@ -1,0 +1,1255 @@
+Index: src/core/root.reducer.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/core/root.reducer.js	(date 1564500679000)
++++ src/core/root.reducer.js	(date 1564500679000)
+@@ -0,0 +1,6 @@
++import { combineReducers } from 'redux';
++import { carsReducer } from '../pages/Cars/store/cars/cars.reducer';
++
++export const rootReducer = combineReducers({
++  cars: carsReducer,
++});
+Index: src/core/store.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/core/store.js	(date 1576671505000)
++++ src/core/store.js	(date 1576671505000)
+@@ -0,0 +1,15 @@
++import { createStore, applyMiddleware, compose } from 'redux';
++import thunk from 'redux-thunk';
++import { devToolsEnhancer } from 'redux-devtools-extension/logOnlyInProduction';
++
++import { rootReducer } from './root.reducer';
++
++const initialState = {};
++
++const enhancers = [devToolsEnhancer()];
++
++const middleware = [thunk];
++
++const composedEnhancers = compose(applyMiddleware(...middleware), ...enhancers);
++
++export const store = createStore(rootReducer, initialState, composedEnhancers);
+Index: src/core/routing/history.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/core/routing/history.js	(date 1564500679000)
++++ src/core/routing/history.js	(date 1564500679000)
+@@ -0,0 +1,7 @@
++import { createBrowserHistory } from 'history';
++
++export const history = createBrowserHistory();
++
++history.listen(location => {
++  console.log(location);
++});
+Index: src/pages/Cars/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/pages/Cars/index.js	(date 1564500679000)
++++ src/pages/Cars/index.js	(date 1564500679000)
+@@ -0,0 +1,4 @@
++export { Cars } from './Cars';
++export { RedCar } from './ChildComponents/RedCar';
++export { GreenCar } from './ChildComponents/GreenCar';
++export { AnotherCar } from './ChildComponents/AnotherCar';
+Index: src/pages/Cars/Cars.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/pages/Cars/Cars.jsx	(date 1576671505000)
++++ src/pages/Cars/Cars.jsx	(date 1576671505000)
+@@ -0,0 +1,25 @@
++import React, { useEffect } from 'react';
++import { connect } from 'react-redux';
++import { setCarsList } from './store/cars/cars.actions';
++import { carsSelector } from './store/cars/cars.selector';
++
++const CarsComponent = ({ carsList, setCars }) => {
++  useEffect(() => {
++    setCars();
++  }, [setCars]);
++  return (
++    <div>
++      {carsList.map((car, index) => (
++        <p key={`car-${index}`}>{car}</p>
++      ))}
++    </div>
++  );
++};
++
++const mapStateToProps = state => ({
++  carsList: carsSelector.carsList(state),
++});
++
++export const Cars = connect(mapStateToProps, { setCars: setCarsList })(
++  CarsComponent,
++);
+Index: src/pages/Cars/store/cars/cars.selector.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/pages/Cars/store/cars/cars.selector.js	(date 1564500679000)
++++ src/pages/Cars/store/cars/cars.selector.js	(date 1564500679000)
+@@ -0,0 +1,5 @@
++export const carsSelector = {
++  carsList(state) {
++    return state.cars.carsList;
++  },
++};
+Index: src/pages/Cars/store/cars/cars.reducer.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/pages/Cars/store/cars/cars.reducer.js	(date 1564500679000)
++++ src/pages/Cars/store/cars/cars.reducer.js	(date 1564500679000)
+@@ -0,0 +1,17 @@
++import { carsActions } from './cars.actions';
++
++export const initialState = {
++  carsList: [],
++};
++
++export function carsReducer(state = initialState, action) {
++  switch (action.type) {
++    case carsActions.SET_CARS_LIST:
++      return {
++        ...state,
++        carsList: action.payload,
++      };
++    default:
++      return state;
++  }
++}
+Index: src/pages/Cars/store/cars/cars.actions.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/pages/Cars/store/cars/cars.actions.js	(date 1564500679000)
++++ src/pages/Cars/store/cars/cars.actions.js	(date 1564500679000)
+@@ -0,0 +1,16 @@
++import { keyManager } from 'utils/key-manager';
++
++const prefix = '[CARS] ';
++
++const types = {
++  SET_CARS_LIST: 'SET_CARS_LIST',
++};
++
++export const carsActions = keyManager(types, prefix);
++
++export const setCarsList = () => {
++  return {
++    type: carsActions.SET_CARS_LIST,
++    payload: ['Porsche', 'BMW', 'Mitsubishi'],
++  };
++};
+Index: src/pages/Home/Home.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/pages/Home/Home.jsx	(date 1576672007000)
++++ src/pages/Home/Home.jsx	(date 1576672007000)
+@@ -0,0 +1,10 @@
++import React from 'react';
++import './home.scss';
++
++export const Home = () => {
++  return (
++    <div className="home-container">
++      <h1 className="home-title">Home Alex</h1>
++    </div>
++  );
++};
+Index: src/pages/Cars/ChildComponents/AnotherCar/index.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/pages/Cars/ChildComponents/AnotherCar/index.jsx	(date 1564500679000)
++++ src/pages/Cars/ChildComponents/AnotherCar/index.jsx	(date 1564500679000)
+@@ -0,0 +1,10 @@
++import React from 'react';
++import { withRouter } from 'react-router';
++
++const AnotherCarComponent = ({
++  match: {
++    params: { id },
++  },
++}) => <div>{id} car withRouter</div>;
++
++export const AnotherCar = withRouter(AnotherCarComponent);
+Index: src/pages/Cars/ChildComponents/GreenCar/index.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/pages/Cars/ChildComponents/GreenCar/index.jsx	(date 1564500679000)
++++ src/pages/Cars/ChildComponents/GreenCar/index.jsx	(date 1564500679000)
+@@ -0,0 +1,3 @@
++import React from 'react';
++
++export const GreenCar = () => <div>Green car</div>;
+Index: src/pages/Cars/ChildComponents/RedCar/index.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/pages/Cars/ChildComponents/RedCar/index.jsx	(date 1564500679000)
++++ src/pages/Cars/ChildComponents/RedCar/index.jsx	(date 1564500679000)
+@@ -0,0 +1,3 @@
++import React from 'react';
++
++export const RedCar = () => <div>Red car</div>;
+Index: src/utils/key-manager.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/utils/key-manager.js	(date 1564500679000)
++++ src/utils/key-manager.js	(date 1564500679000)
+@@ -0,0 +1,5 @@
++export const keyManager = (actions, prefix) =>
++  Object.keys(actions).reduce((acc, cur) => {
++    acc[cur] = prefix + cur;
++    return acc;
++  }, {});
+Index: src/utils/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/utils/index.js	(date 1564500679000)
++++ src/utils/index.js	(date 1564500679000)
+@@ -0,0 +1,1 @@
++export { uuid } from './uuid';
+Index: src/pages/Home/home.scss
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/pages/Home/home.scss	(date 1576671895000)
++++ src/pages/Home/home.scss	(date 1576671895000)
+@@ -0,0 +1,3 @@
++.home-title {
++  text-align: center;
++}
+Index: src/utils/uuid.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/utils/uuid.js	(date 1564500679000)
++++ src/utils/uuid.js	(date 1564500679000)
+@@ -0,0 +1,6 @@
++export const uuid = () =>
++  'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
++    const r = Math.random() * 16 || 0;
++    const v = c === 'x' ? r : (r && 0x3) || 0x8;
++    return v.toString(16);
++  });
+Index: src/tests/App.test.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/tests/App.test.js	(date 1564500679000)
++++ src/tests/App.test.js	(date 1564500679000)
+@@ -0,0 +1,9 @@
++import React from 'react';
++import ReactDOM from 'react-dom';
++import { App } from 'App';
++
++it('renders without crashing', () => {
++  const div = document.createElement('div');
++  ReactDOM.render(<App />, div);
++  ReactDOM.unmountComponentAtNode(div);
++});
+Index: src/pages/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/pages/index.js	(date 1564500679000)
++++ src/pages/index.js	(date 1564500679000)
+@@ -0,0 +1,2 @@
++export { Home } from './Home';
++export { Cars } from './Cars';
+Index: src/pages/Home/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/pages/Home/index.js	(date 1564500679000)
++++ src/pages/Home/index.js	(date 1564500679000)
+@@ -0,0 +1,1 @@
++export { Home } from './Home';
+Index: src/App.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/App.jsx	(date 1564500679000)
++++ src/App.jsx	(date 1564500679000)
+@@ -0,0 +1,10 @@
++import React from 'react';
++import { Router } from 'react-router-dom';
++import { AppRoutes } from 'components';
++import { history } from 'core/routing/history';
++
++export const App = () => (
++  <Router history={history}>
++    <AppRoutes />
++  </Router>
++);
+Index: src/config/routes.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/config/routes.js	(date 1564500679000)
++++ src/config/routes.js	(date 1564500679000)
+@@ -0,0 +1,9 @@
++export const routes = {
++  home: '/',
++  cars: '/cars',
++  car: {
++    red: '/car/red',
++    green: '/car/green',
++  },
++  otherCar: '/car/:id',
++};
+Index: src/config/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/config/index.js	(date 1564500679000)
++++ src/config/index.js	(date 1564500679000)
+@@ -0,0 +1,2 @@
++export { routes } from './routes';
++export { authRequest, apiRequest } from './axios';
+Index: src/config/axios.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/config/axios.js	(date 1564500679000)
++++ src/config/axios.js	(date 1564500679000)
+@@ -0,0 +1,5 @@
++import axios from 'axios';
++
++export const authRequest = axios.create({ baseUrl: '/' });
++
++export const apiRequest = axios.create({ baseURL: '/api/' });
+Index: src/assets/images/logo.svg
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/assets/images/logo.svg	(date 1564500679000)
++++ src/assets/images/logo.svg	(date 1564500679000)
+@@ -0,0 +1,1 @@
++<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 841.9 595.3"><g fill="#61DAFB"><path d="M666.3 296.5c0-32.5-40.7-63.3-103.1-82.4 14.4-63.6 8-114.2-20.2-130.4-6.5-3.8-14.1-5.6-22.4-5.6v22.3c4.6 0 8.3.9 11.4 2.6 13.6 7.8 19.5 37.5 14.9 75.7-1.1 9.4-2.9 19.3-5.1 29.4-19.6-4.8-41-8.5-63.5-10.9-13.5-18.5-27.5-35.3-41.6-50 32.6-30.3 63.2-46.9 84-46.9V78c-27.5 0-63.5 19.6-99.9 53.6-36.4-33.8-72.4-53.2-99.9-53.2v22.3c20.7 0 51.4 16.5 84 46.6-14 14.7-28 31.4-41.3 49.9-22.6 2.4-44 6.1-63.6 11-2.3-10-4-19.7-5.2-29-4.7-38.2 1.1-67.9 14.6-75.8 3-1.8 6.9-2.6 11.5-2.6V78.5c-8.4 0-16 1.8-22.6 5.6-28.1 16.2-34.4 66.7-19.9 130.1-62.2 19.2-102.7 49.9-102.7 82.3 0 32.5 40.7 63.3 103.1 82.4-14.4 63.6-8 114.2 20.2 130.4 6.5 3.8 14.1 5.6 22.5 5.6 27.5 0 63.5-19.6 99.9-53.6 36.4 33.8 72.4 53.2 99.9 53.2 8.4 0 16-1.8 22.6-5.6 28.1-16.2 34.4-66.7 19.9-130.1 62-19.1 102.5-49.9 102.5-82.3zm-130.2-66.7c-3.7 12.9-8.3 26.2-13.5 39.5-4.1-8-8.4-16-13.1-24-4.6-8-9.5-15.8-14.4-23.4 14.2 2.1 27.9 4.7 41 7.9zm-45.8 106.5c-7.8 13.5-15.8 26.3-24.1 38.2-14.9 1.3-30 2-45.2 2-15.1 0-30.2-.7-45-1.9-8.3-11.9-16.4-24.6-24.2-38-7.6-13.1-14.5-26.4-20.8-39.8 6.2-13.4 13.2-26.8 20.7-39.9 7.8-13.5 15.8-26.3 24.1-38.2 14.9-1.3 30-2 45.2-2 15.1 0 30.2.7 45 1.9 8.3 11.9 16.4 24.6 24.2 38 7.6 13.1 14.5 26.4 20.8 39.8-6.3 13.4-13.2 26.8-20.7 39.9zm32.3-13c5.4 13.4 10 26.8 13.8 39.8-13.1 3.2-26.9 5.9-41.2 8 4.9-7.7 9.8-15.6 14.4-23.7 4.6-8 8.9-16.1 13-24.1zM421.2 430c-9.3-9.6-18.6-20.3-27.8-32 9 .4 18.2.7 27.5.7 9.4 0 18.7-.2 27.8-.7-9 11.7-18.3 22.4-27.5 32zm-74.4-58.9c-14.2-2.1-27.9-4.7-41-7.9 3.7-12.9 8.3-26.2 13.5-39.5 4.1 8 8.4 16 13.1 24 4.7 8 9.5 15.8 14.4 23.4zM420.7 163c9.3 9.6 18.6 20.3 27.8 32-9-.4-18.2-.7-27.5-.7-9.4 0-18.7.2-27.8.7 9-11.7 18.3-22.4 27.5-32zm-74 58.9c-4.9 7.7-9.8 15.6-14.4 23.7-4.6 8-8.9 16-13 24-5.4-13.4-10-26.8-13.8-39.8 13.1-3.1 26.9-5.8 41.2-7.9zm-90.5 125.2c-35.4-15.1-58.3-34.9-58.3-50.6 0-15.7 22.9-35.6 58.3-50.6 8.6-3.7 18-7 27.7-10.1 5.7 19.6 13.2 40 22.5 60.9-9.2 20.8-16.6 41.1-22.2 60.6-9.9-3.1-19.3-6.5-28-10.2zM310 490c-13.6-7.8-19.5-37.5-14.9-75.7 1.1-9.4 2.9-19.3 5.1-29.4 19.6 4.8 41 8.5 63.5 10.9 13.5 18.5 27.5 35.3 41.6 50-32.6 30.3-63.2 46.9-84 46.9-4.5-.1-8.3-1-11.3-2.7zm237.2-76.2c4.7 38.2-1.1 67.9-14.6 75.8-3 1.8-6.9 2.6-11.5 2.6-20.7 0-51.4-16.5-84-46.6 14-14.7 28-31.4 41.3-49.9 22.6-2.4 44-6.1 63.6-11 2.3 10.1 4.1 19.8 5.2 29.1zm38.5-66.7c-8.6 3.7-18 7-27.7 10.1-5.7-19.6-13.2-40-22.5-60.9 9.2-20.8 16.6-41.1 22.2-60.6 9.9 3.1 19.3 6.5 28.1 10.2 35.4 15.1 58.3 34.9 58.3 50.6-.1 15.7-23 35.6-58.4 50.6zM320.8 78.4z"/><circle cx="420.9" cy="296.5" r="45.7"/></g></svg>
+\ No newline at end of file
+Index: src/components/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/index.js	(date 1564500679000)
++++ src/components/index.js	(date 1564500679000)
+@@ -0,0 +1,3 @@
++export { AppRoutes } from './AppRoutes';
++export { NotFound } from './NotFound';
++export { Navigation } from './Navigation';
+Index: src/index.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/index.jsx	(date 1564500679000)
++++ src/index.jsx	(date 1564500679000)
+@@ -0,0 +1,18 @@
++import React from 'react';
++import ReactDOM from 'react-dom';
++import { Provider } from 'react-redux';
++import 'index.scss';
++import { App } from 'App';
++import { store } from './core/store';
++
++ReactDOM.render(
++  <Provider store={store}>
++    <App />
++  </Provider>,
++  document.getElementById('root'),
++);
++
++// If you want your app to work offline and load faster, you can change
++// unregister() to register() below. Note this comes with some pitfalls.
++// Learn more about service workers: https://bit.ly/CRA-PWA
++// serviceWorker.unregister();
+Index: src/services/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/services/index.js	(date 1564500679000)
++++ src/services/index.js	(date 1564500679000)
+@@ -0,0 +1,1 @@
++export { getHome } from './api';
+Index: src/services/auth.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/services/auth.js	(date 1564500679000)
++++ src/services/auth.js	(date 1564500679000)
+@@ -0,0 +1,23 @@
++import { authRequest } from 'config';
++
++authRequest.interceptor.request.use(
++  config => {
++    // Do something if response's request is 200
++    return config;
++  },
++  error => {
++    // Do something if response's request !== 200 (401 not login)
++    return Promise.reject(error);
++  },
++);
++
++authRequest.interceptors.response.use(
++  response => {
++    // Do something with response data
++    return response;
++  },
++  error => {
++    // Do something with response error
++    return Promise.reject(error);
++  },
++);
+Index: src/services/api/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/services/api/index.js	(date 1564500679000)
++++ src/services/api/index.js	(date 1564500679000)
+@@ -0,0 +1,3 @@
++import { apiRequest } from 'config';
++
++export const getHome = apiRequest('/home');
+Index: .editorconfig
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .editorconfig	(date 1564500679000)
++++ .editorconfig	(date 1564500679000)
+@@ -0,0 +1,18 @@
++# EditorConfig is awesome: http://EditorConfig.org
++root = true
++
++[*]
++charset = utf-8
++end_of_line = lf
++indent_size = 2
++indent_style = space
++insert_final_newline = true
++max_line_length = 80
++trim_trailing_whitespace = true
++
++[*.md]
++max_line_length = 0
++trim_trailing_whitespace = false
++
++[COMMIT_EDITMSG]
++max_line_length = 0
+Index: src/serviceWorker.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/serviceWorker.js	(date 1564500679000)
++++ src/serviceWorker.js	(date 1564500679000)
+@@ -0,0 +1,137 @@
++/* eslint-disable */
++
++// This optional code is used to register a service worker.
++// register() is not called by default.
++
++// This lets the app load faster on subsequent visits in production, and gives
++// it offline capabilities. However, it also means that developers (and users)
++// will only see deployed updates on subsequent visits to a page, after all the
++// existing tabs open on the page have been closed, since previously cached
++// resources are updated in the background.
++
++// To learn more about the benefits of this model and instructions on how to
++// opt-in, read https://bit.ly/CRA-PWA
++
++const isLocalhost = Boolean(
++  window.location.hostname === 'localhost' ||
++    // [::1] is the IPv6 localhost address.
++    window.location.hostname === '[::1]' ||
++    // 127.0.0.1/8 is considered localhost for IPv4.
++    window.location.hostname.match(
++      /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
++    )
++);
++
++export function register(config) {
++  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
++    // The URL constructor is available in all browsers that support SW.
++    const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
++    if (publicUrl.origin !== window.location.origin) {
++      // Our service worker won't work if PUBLIC_URL is on a different origin
++      // from what our page is served on. This might happen if a CDN is used to
++      // serve assets; see https://github.com/facebook/create-react-app/issues/2374
++      return;
++    }
++
++    window.addEventListener('load', () => {
++      const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
++
++      if (isLocalhost) {
++        // This is running on localhost. Let's check if a service worker still exists or not.
++        checkValidServiceWorker(swUrl, config);
++
++        // Add some additional logging to localhost, pointing developers to the
++        // service worker/PWA documentation.
++        navigator.serviceWorker.ready.then(() => {
++          console.log(
++            'This web app is being served cache-first by a service ' +
++              'worker. To learn more, visit https://bit.ly/CRA-PWA'
++          );
++        });
++      } else {
++        // Is not localhost. Just register service worker
++        registerValidSW(swUrl, config);
++      }
++    });
++  }
++}
++
++function registerValidSW(swUrl, config) {
++  navigator.serviceWorker
++    .register(swUrl)
++    .then(registration => {
++      registration.onupdatefound = () => {
++        const installingWorker = registration.installing;
++        if (installingWorker == null) {
++          return;
++        }
++        installingWorker.onstatechange = () => {
++          if (installingWorker.state === 'installed') {
++            if (navigator.serviceWorker.controller) {
++              // At this point, the updated precached content has been fetched,
++              // but the previous service worker will still serve the older
++              // content until all client tabs are closed.
++              console.log(
++                'New content is available and will be used when all ' +
++                  'tabs for this page are closed. See https://bit.ly/CRA-PWA.'
++              );
++
++              // Execute callback
++              if (config && config.onUpdate) {
++                config.onUpdate(registration);
++              }
++            } else {
++              // At this point, everything has been precached.
++              // It's the perfect time to display a
++              // "Content is cached for offline use." message.
++              console.log('Content is cached for offline use.');
++
++              // Execute callback
++              if (config && config.onSuccess) {
++                config.onSuccess(registration);
++              }
++            }
++          }
++        };
++      };
++    })
++    .catch(error => {
++      console.error('Error during service worker registration:', error);
++    });
++}
++
++function checkValidServiceWorker(swUrl, config) {
++  // Check if the service worker can be found. If it can't reload the page.
++  fetch(swUrl)
++    .then(response => {
++      // Ensure service worker exists, and that we really are getting a JS file.
++      const contentType = response.headers.get('content-type');
++      if (
++        response.status === 404 ||
++        (contentType != null && contentType.indexOf('javascript') === -1)
++      ) {
++        // No service worker found. Probably a different app. Reload the page.
++        navigator.serviceWorker.ready.then(registration => {
++          registration.unregister().then(() => {
++            window.location.reload();
++          });
++        });
++      } else {
++        // Service worker found. Proceed as normal.
++        registerValidSW(swUrl, config);
++      }
++    })
++    .catch(() => {
++      console.log(
++        'No internet connection found. App is running in offline mode.'
++      );
++    });
++}
++
++export function unregister() {
++  if ('serviceWorker' in navigator) {
++    navigator.serviceWorker.ready.then(registration => {
++      registration.unregister();
++    });
++  }
++}
+Index: src/index.scss
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/index.scss	(date 1564500679000)
++++ src/index.scss	(date 1564500679000)
+@@ -0,0 +1,6 @@
++body {
++  margin: 0;
++  font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
++  -webkit-font-smoothing: antialiased;
++  -moz-osx-font-smoothing: grayscale;
++}
+Index: src/components/Navigation.scss
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Navigation.scss	(date 1564500679000)
++++ src/components/Navigation.scss	(date 1564500679000)
+@@ -0,0 +1,52 @@
++.header-wrapper {
++  background: #20232a;
++  color: #fff;
++  padding: 8px 0;
++  width: 100%;
++
++  .header-item {
++    display: flex;
++    justify-content: space-around;
++    height: 35px;
++
++    .react-link {
++      display: flex;
++      align-items: center;
++      color: #fff;
++      text-decoration: none;
++
++      img {
++        max-height: 100%;
++      }
++    }
++  }
++}
++
++.site-navigation {
++  display: flex;
++  margin: 0;
++  padding: 0;
++  list-style: none;
++
++  li {
++    flex: 1 1 auto;
++    margin: 0;
++    text-align: center;
++    white-space: nowrap;
++
++    a {
++      border: 0;
++      color: #a8a9ac;
++      display: flex;
++      font-size: 16px;
++      font-weight: 300;
++      margin: 0;
++      padding: 6px 10px;
++      text-decoration: none;
++
++      &:hover {
++        color: #fff;
++      }
++    }
++  }
++}
+Index: src/components/Navigation.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Navigation.jsx	(date 1564500679000)
++++ src/components/Navigation.jsx	(date 1564500679000)
+@@ -0,0 +1,40 @@
++import React from 'react';
++import { Link } from 'react-router-dom';
++
++import { routes } from 'config';
++
++import './Navigation.scss';
++import Logo from 'assets/images/logo.svg';
++
++export const Navigation = () => (
++  <div className="header-wrapper">
++    <header className="header-item">
++      <Link to={routes.home} className="react-link">
++        <img className="logo" src={Logo} alt="React" />
++        <h2>React</h2>
++      </Link>
++      <nav>
++        <ul className="site-navigation">
++          <li>
++            <Link to={routes.home}>Home</Link>
++          </li>
++          <li>
++            <Link to={routes.cars}>Cars</Link>
++          </li>
++          <li>
++            <Link to={routes.car.red}>Red car</Link>
++          </li>
++          <li>
++            <Link to={routes.car.green}>Green car</Link>
++          </li>
++          <li>
++            <Link to="/car/pink">Another car</Link>
++          </li>
++          <li>
++            <Link to="/notfoundpath">Not found</Link>
++          </li>
++        </ul>
++      </nav>
++    </header>
++  </div>
++);
+Index: src/components/AppRoutes.scss
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/AppRoutes.scss	(date 1576671743000)
++++ src/components/AppRoutes.scss	(date 1576671743000)
+@@ -0,0 +1,3 @@
++.component-container {
++  height: calc(100vh - 40px);
++}
+Index: src/components/AppRoutes.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/AppRoutes.jsx	(date 1564500679000)
++++ src/components/AppRoutes.jsx	(date 1564500679000)
+@@ -0,0 +1,26 @@
++import React from 'react';
++import { Switch, Route } from 'react-router-dom';
++
++import { Home, Cars } from 'pages';
++import { RedCar, GreenCar, AnotherCar } from 'pages/Cars';
++import { NotFound, Navigation } from 'components';
++
++import { routes } from 'config';
++
++import './AppRoutes.scss';
++
++export const AppRoutes = () => (
++  <div>
++    <Navigation />
++    <div className="component-container">
++      <Switch>
++        <Route exact path={routes.home} component={Home} />
++        <Route exact path={routes.cars} component={Cars} />
++        <Route exact path={routes.car.red} component={RedCar} />
++        <Route exact path={routes.car.green} component={GreenCar} />
++        <Route exact path={routes.otherCar} component={AnotherCar} />
++        <Route component={NotFound} />
++      </Switch>
++    </div>
++  </div>
++);
+Index: src/components/NotFound.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/NotFound.jsx	(date 1564500679000)
++++ src/components/NotFound.jsx	(date 1564500679000)
+@@ -0,0 +1,3 @@
++import React from 'react';
++
++export const NotFound = () => <div>404 page</div>;
+Index: public/manifest.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- public/manifest.json	(date 1564500679000)
++++ public/manifest.json	(date 1564500679000)
+@@ -0,0 +1,15 @@
++{
++  "short_name": "React App",
++  "name": "Create React App Sample",
++  "icons": [
++    {
++      "src": "favicon.ico",
++      "sizes": "64x64 32x32 24x24 16x16",
++      "type": "image/x-icon"
++    }
++  ],
++  "start_url": ".",
++  "display": "standalone",
++  "theme_color": "#000000",
++  "background_color": "#ffffff"
++}
+Index: package.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- package.json	(date 1564500679000)
++++ package.json	(date 1564500679000)
+@@ -0,0 +1,74 @@
++{
++  "name": "skysoft-react-boilerplate",
++  "version": "0.1.0",
++  "private": true,
++  "scripts": {
++    "start": "react-scripts start",
++    "build": "npm run lint && react-scripts build",
++    "test": "react-scripts test",
++    "lint:js": "eslint --fix src/ --ext .js,.jsx",
++    "lint:css": "stylelint ./src/**/*.scss",
++    "lint": "npm run lint:js && npm run lint:css",
++    "eslint-check": "eslint --print-config . | eslint-config-prettier-check"
++  },
++  "dependencies": {
++    "axios": "^0.19.0",
++    "classnames": "^2.2.6",
++    "formik": "^1.5.7",
++    "history": "^4.9.0",
++    "node-sass": "^4.12.0",
++    "react": "^16.8.6",
++    "react-dom": "^16.8.6",
++    "react-redux": "^7.1.0",
++    "react-router": "^5.0.1",
++    "react-router-dom": "^5.0.1",
++    "react-scripts": "3.0.1",
++    "redux": "^4.0.1",
++    "redux-devtools-extension": "^2.13.8",
++    "redux-thunk": "^2.3.0"
++  },
++  "devDependencies": {
++    "eslint": "^5.16.0",
++    "eslint-config-airbnb": "^17.1.0",
++    "eslint-config-prettier": "^5.0.0",
++    "eslint-plugin-import": "^2.17.3",
++    "eslint-plugin-jsx-a11y": "^6.2.1",
++    "eslint-plugin-prettier": "^3.1.0",
++    "eslint-plugin-react": "^7.13.0",
++    "eslint-plugin-react-hooks": "^1.6.0",
++    "husky": "^2.4.1",
++    "lint-staged": "^8.1.6",
++    "prettier": "^1.18.2",
++    "stylelint": "^10.0.1",
++    "stylelint-config-prettier": "^5.2.0",
++    "stylelint-config-recommended": "^2.2.0",
++    "stylelint-scss": "^3.6.1"
++  },
++  "eslintConfig": {
++    "extends": "react-app"
++  },
++  "husky": {
++    "hooks": {
++      "pre-commit": "npm run lint"
++    }
++  },
++  "lint-staged": {
++    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
++      "npm run lint",
++      "git add"
++    ]
++  },
++  "browserslist": {
++    "production": [
++      ">0.2%",
++      "not dead",
++      "not op_mini all"
++    ],
++    "development": [
++      "last 1 chrome version",
++      "last 1 firefox version",
++      "last 1 safari version"
++    ]
++  },
++  "proxy": ""
++}
+Index: jsconfig.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- jsconfig.json	(date 1564500679000)
++++ jsconfig.json	(date 1564500679000)
+@@ -0,0 +1,8 @@
++{
++  "compilerOptions": {
++    "baseUrl": "src/",
++    "paths": {
++      "@/*": ["src/*"]
++    }
++  }
++}
+Index: public/index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- public/index.html	(date 1564500679000)
++++ public/index.html	(date 1564500679000)
+@@ -0,0 +1,38 @@
++<!DOCTYPE html>
++<html lang="en">
++  <head>
++    <meta charset="utf-8" />
++    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
++    <meta name="viewport" content="width=device-width, initial-scale=1" />
++    <meta name="theme-color" content="#000000" />
++    <!--
++      manifest.json provides metadata used when your web app is installed on a
++      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
++    -->
++    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
++    <!--
++      Notice the use of %PUBLIC_URL% in the tags above.
++      It will be replaced with the URL of the `public` folder during the build.
++      Only files inside the `public` folder can be referenced from the HTML.
++
++      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
++      work correctly both with client-side routing and a non-root public URL.
++      Learn how to configure a non-root public URL by running `npm run build`.
++    -->
++    <title>React App</title>
++  </head>
++  <body>
++    <noscript>You need to enable JavaScript to run this app.</noscript>
++    <div id="root"></div>
++    <!--
++      This HTML file is a template.
++      If you open it directly in the browser, you will see an empty page.
++
++      You can add webfonts, meta tags, or analytics to this file.
++      The build step will place the bundled scripts into the <body> tag.
++
++      To begin the development, run `npm start` or `yarn start`.
++      To create a production bundle, use `npm run build` or `yarn build`.
++    -->
++  </body>
++</html>
+Index: .stylelintrc.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .stylelintrc.json	(date 1564500679000)
++++ .stylelintrc.json	(date 1564500679000)
+@@ -0,0 +1,135 @@
++{
++  "plugins": ["stylelint-scss"],
++  "extends": ["stylelint-config-recommended", "stylelint-config-prettier"],
++  "processors": [],
++  "rules": {
++    "at-rule-no-unknown": true,
++    "block-no-empty": true,
++    "color-no-invalid-hex": true,
++    "comment-no-empty": true,
++    "declaration-block-no-duplicate-properties": [
++      true,
++      {
++        "ignore": ["consecutive-duplicates-with-different-values"]
++      }
++    ],
++    "declaration-block-no-shorthand-property-overrides": true,
++    "font-family-no-duplicate-names": true,
++    "font-family-no-missing-generic-family-keyword": true,
++    "function-calc-no-unspaced-operator": true,
++    "function-linear-gradient-no-nonstandard-direction": true,
++    "keyframe-declaration-no-important": true,
++    "media-feature-name-no-unknown": true,
++    "no-descending-specificity": true,
++    "no-duplicate-at-import-rules": true,
++    "no-duplicate-selectors": true,
++    "no-empty-source": true,
++    "no-extra-semicolons": true,
++    "no-invalid-double-slash-comments": true,
++    "property-no-unknown": true,
++    "selector-pseudo-class-no-unknown": true,
++    "selector-pseudo-element-no-unknown": true,
++    "selector-type-no-unknown": true,
++    "string-no-newline": true,
++    "unit-no-unknown": true,
++    "at-rule-empty-line-before": [
++      "always",
++      {
++        "except": ["blockless-after-same-name-blockless", "first-nested"],
++        "ignore": ["after-comment"]
++      }
++    ],
++    "at-rule-name-case": "lower",
++    "at-rule-name-space-after": "always-single-line",
++    "at-rule-semicolon-newline-after": "always",
++    "block-closing-brace-empty-line-before": "never",
++    "block-closing-brace-newline-after": "always",
++    "block-closing-brace-newline-before": "always-multi-line",
++    "block-closing-brace-space-before": "always-single-line",
++    "block-opening-brace-newline-after": "always-multi-line",
++    "block-opening-brace-space-after": "always-single-line",
++    "block-opening-brace-space-before": "always",
++    "color-hex-case": "lower",
++    "color-hex-length": "short",
++    "comment-empty-line-before": [
++      "always",
++      {
++        "except": ["first-nested"],
++        "ignore": ["stylelint-commands"]
++      }
++    ],
++    "comment-whitespace-inside": "always",
++    "custom-property-empty-line-before": [
++      "always",
++      {
++        "except": ["after-custom-property", "first-nested"],
++        "ignore": ["after-comment", "inside-single-line-block"]
++      }
++    ],
++    "declaration-bang-space-after": "never",
++    "declaration-bang-space-before": "always",
++    "declaration-block-semicolon-newline-after": "always-multi-line",
++    "declaration-block-semicolon-space-after": "always-single-line",
++    "declaration-block-semicolon-space-before": "never",
++    "declaration-block-single-line-max-declarations": 1,
++    "declaration-block-trailing-semicolon": "always",
++    "declaration-colon-space-after": "always-single-line",
++    "declaration-colon-space-before": "never",
++    "declaration-empty-line-before": [
++      "always",
++      {
++        "except": ["after-declaration", "first-nested"],
++        "ignore": ["after-comment", "inside-single-line-block"]
++      }
++    ],
++    "function-comma-newline-after": "always-multi-line",
++    "function-comma-space-after": "always-single-line",
++    "function-comma-space-before": "never",
++    "function-max-empty-lines": 2,
++    "function-name-case": "lower",
++    "function-parentheses-newline-inside": "always-multi-line",
++    "function-parentheses-space-inside": "never-single-line",
++    "function-whitespace-after": "always",
++    "indentation": 2,
++    "length-zero-no-unit": true,
++    "max-empty-lines": 2,
++    "media-feature-colon-space-after": "always",
++    "media-feature-colon-space-before": "never",
++    "media-feature-name-case": "lower",
++    "media-feature-parentheses-space-inside": "never",
++    "media-feature-range-operator-space-after": "always",
++    "media-feature-range-operator-space-before": "always",
++    "media-query-list-comma-newline-after": "always-multi-line",
++    "media-query-list-comma-space-after": "always-single-line",
++    "media-query-list-comma-space-before": "never",
++    "no-eol-whitespace": true,
++    "number-leading-zero": "always",
++    "number-no-trailing-zeros": true,
++    "property-case": "lower",
++    "rule-empty-line-before": [
++      "always-multi-line",
++      {
++        "except": ["first-nested"],
++        "ignore": ["after-comment"]
++      }
++    ],
++    "selector-attribute-brackets-space-inside": "never",
++    "selector-attribute-operator-space-after": "never",
++    "selector-attribute-operator-space-before": "never",
++    "selector-combinator-space-after": "always",
++    "selector-combinator-space-before": "always",
++    "selector-descendant-combinator-no-non-space": true,
++    "selector-list-comma-newline-after": "always",
++    "selector-list-comma-space-before": "never",
++    "selector-max-empty-lines": 0,
++    "selector-pseudo-class-case": "lower",
++    "selector-pseudo-class-parentheses-space-inside": "never",
++    "selector-pseudo-element-case": "lower",
++    "selector-pseudo-element-colon-notation": "double",
++    "selector-type-case": "lower",
++    "unit-case": "lower",
++    "value-list-comma-space-after": "always-single-line",
++    "value-list-comma-space-before": "never",
++    "value-list-max-empty-lines": 0
++  }
++}
+Index: .prettierrc
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .prettierrc	(date 1564500679000)
++++ .prettierrc	(date 1564500679000)
+@@ -0,0 +1,12 @@
++{
++  "printWidth": 80,
++  "tabWidth": 2,
++  "useTabs": false,
++  "semi": true,
++  "singleQuote": true,
++  "jsxSingleQuote": false,
++  "trailingComma": "all",
++  "bracketSpacing": true,
++  "jsxBracketSameLine": false,
++  "arrowParens": "avoid"
++}
+Index: .nvmrc
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .nvmrc	(date 1564500679000)
++++ .nvmrc	(date 1564500679000)
+@@ -0,0 +1,2 @@
++# node version
++# example 10.15.0
+Index: .gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .gitignore	(date 1564500679000)
++++ .gitignore	(date 1564500679000)
+@@ -0,0 +1,37 @@
++# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
++
++# dependencies
++/node_modules
++/.pnp
++.pnp.js
++
++# testing
++/coverage
++
++# production
++/build
++
++# misc
++.DS_Store
++.env.local
++.env.development.local
++.env.test.local
++.env.production.local
++
++npm-debug.log*
++yarn-debug.log*
++yarn-error.log*
++
++# IDE
++.idea
++.vscode
++
++# ignore lock files
++package-lock.json
++yarn.lock
++
++# env config file.
++# If you need specified enviroments only for develop purpuse use .env.development.
++# If you need specified enviroments only for production purpuse use .env.production.
++# If you need specified enviroments for both of it use env file.
++.env
+Index: .eslintrc
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .eslintrc	(date 1564500679000)
++++ .eslintrc	(date 1564500679000)
+@@ -0,0 +1,48 @@
++{
++  "extends": [
++    "airbnb",
++    "plugin:react/recommended",
++    "plugin:prettier/recommended",
++    "prettier",
++    "prettier/react"
++  ],
++  "settings": {
++    "react": {
++      "version": "detect"
++    },
++    "import/resolver": {
++      "node": {
++        "paths": ["src"],
++        "extensions": [".js", "jsx"]
++      }
++    }
++  },
++  "parser": "babel-eslint",
++  "env": {
++    "node": true,
++    "es6": true,
++    "browser": true,
++    "jest": true
++  },
++  "rules": {
++    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
++    "import/prefer-default-export": 0,
++    "import/no-default-export": "error",
++    "no-multi-spaces": "error",
++    "no-console": "warn",
++    "camelcase": 0,
++    "class-methods-use-this": 0,
++    "import/no-unresolved": [".jsx", ".js"],
++    "react/no-array-index-key": "warn",
++    "react/prop-types": false,
++    "react/self-closing-comp": [
++      "error",
++      {
++        "component": true,
++        "html": false
++      }
++    ],
++    "jsx-a11y/no-static-element-interactions": 0,
++    "jsx-a11y/click-events-have-key-events": 0
++  }
++}
+Index: .eslintignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .eslintignore	(date 1564500679000)
++++ .eslintignore	(date 1564500679000)
+@@ -0,0 +1,1 @@
++package.json
