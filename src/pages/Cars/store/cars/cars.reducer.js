@@ -1,7 +1,7 @@
-import { carsActions } from './cars.actions';
+import { carsActions } from "./cars.actions";
 
 export const initialState = {
-  carsList: [],
+  carsList: []
 };
 
 export function carsReducer(state = initialState, action) {
@@ -9,7 +9,7 @@ export function carsReducer(state = initialState, action) {
     case carsActions.SET_CARS_LIST:
       return {
         ...state,
-        carsList: action.payload,
+        carsList: action.payload
       };
     default:
       return state;

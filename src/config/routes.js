@@ -1,9 +1,9 @@
 export const routes = {
-  home: '/',
-  cars: '/cars',
+  home: "/",
+  cars: "/cars",
   car: {
-    red: '/car/red',
-    green: '/car/green',
+    red: "/car/red",
+    green: "/car/green"
   },
-  otherCar: '/car/:id',
+  otherCar: "/car/:id"
 };

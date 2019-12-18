@@ -1,13 +1,13 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React from "react";
+import { Switch, Route } from "react-router-dom";
 
-import { Home, Cars } from 'pages';
-import { RedCar, GreenCar, AnotherCar } from 'pages/Cars';
-import { NotFound, Navigation } from 'components';
+import { Home, Cars } from "pages";
+import { RedCar, GreenCar, AnotherCar } from "pages/Cars";
+import { NotFound, Navigation } from "components";
 
-import { routes } from 'config';
+import { routes } from "config";
 
-import './AppRoutes.scss';
+import "./AppRoutes.scss";
 
 export const AppRoutes = () => (
   <div>

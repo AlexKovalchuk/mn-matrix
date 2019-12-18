@@ -1,8 +1,8 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import { devToolsEnhancer } from 'redux-devtools-extension/logOnlyInProduction';
+import { createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
+import { devToolsEnhancer } from "redux-devtools-extension/logOnlyInProduction";
 
-import { rootReducer } from './root.reducer';
+import { rootReducer } from "./root.reducer";
 
 const initialState = {};
 

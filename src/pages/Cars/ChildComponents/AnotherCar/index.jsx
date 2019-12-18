@@ -1,10 +1,10 @@
-import React from 'react';
-import { withRouter } from 'react-router';
+import React from "react";
+import { withRouter } from "react-router";
 
 const AnotherCarComponent = ({
   match: {
-    params: { id },
-  },
+    params: { id }
+  }
 }) => <div>{id} car withRouter</div>;
 
 export const AnotherCar = withRouter(AnotherCarComponent);

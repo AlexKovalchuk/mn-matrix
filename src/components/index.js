@@ -1,3 +1,3 @@
-export { AppRoutes } from './AppRoutes';
-export { NotFound } from './NotFound';
-export { Navigation } from './Navigation';
+export { AppRoutes } from "./AppRoutes";
+export { NotFound } from "./NotFound";
+export { Navigation } from "./Navigation";

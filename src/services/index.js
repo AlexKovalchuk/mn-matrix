@@ -1,1 +1,1 @@
-export { getHome } from './api';
+export { getHome } from "./api";

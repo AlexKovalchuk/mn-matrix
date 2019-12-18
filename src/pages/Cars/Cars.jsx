@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { setCarsList } from './store/cars/cars.actions';
-import { carsSelector } from './store/cars/cars.selector';
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { setCarsList } from "./store/cars/cars.actions";
+import { carsSelector } from "./store/cars/cars.selector";
 
 const CarsComponent = ({ carsList, setCars }) => {
   useEffect(() => {
@@ -17,9 +17,9 @@ const CarsComponent = ({ carsList, setCars }) => {
 };
 
 const mapStateToProps = state => ({
-  carsList: carsSelector.carsList(state),
+  carsList: carsSelector.carsList(state)
 });
 
 export const Cars = connect(mapStateToProps, { setCars: setCarsList })(
-  CarsComponent,
+  CarsComponent
 );

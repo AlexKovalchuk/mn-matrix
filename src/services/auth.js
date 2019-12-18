@@ -1,4 +1,4 @@
-import { authRequest } from 'config';
+import { authRequest } from "config";
 
 authRequest.interceptor.request.use(
   config => {
@@ -8,7 +8,7 @@ authRequest.interceptor.request.use(
   error => {
     // Do something if response's request !== 200 (401 not login)
     return Promise.reject(error);
-  },
+  }
 );
 
 authRequest.interceptors.response.use(
@@ -19,5 +19,5 @@ authRequest.interceptors.response.use(
   error => {
     // Do something with response error
     return Promise.reject(error);
-  },
+  }
 );
