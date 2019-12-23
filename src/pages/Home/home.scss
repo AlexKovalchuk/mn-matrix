@@ -1,0 +1,44 @@
+.home-container {
+  .home-title {
+    text-align: center;
+  }
+
+  .buttons-container {
+    width: 500px;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .table-container {
+    width: max-content;
+    margin: 20px;
+
+    .table-square {
+      cursor: pointer;
+      width: 100px;
+      height: 100px;
+      vertical-align: middle;
+    }
+
+    .sumValue {
+      vertical-align: middle;
+      cursor: pointer;
+      color: red;
+      font-weight: 600;
+      width: 100px;
+      height: 100px;
+    }
+
+    .average-row{
+      color: blue;
+      font-weight: 600;
+    }
+
+    .highlight-hover {
+      background-color: silver;
+      color: gold;
+    }
+
+  }
+
+}
