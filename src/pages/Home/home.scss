@@ -7,6 +7,18 @@
     width: 500px;
     display: flex;
     justify-content: space-around;
+    margin-bottom: 20px;
+  }
+
+  .home-page-content {
+    margin: 20px;
+    display: flex;
+    .table-container, .matrix-tz {
+      flex: 1;
+    }
+    .matrix-tz {
+      margin-top: 20px;
+    }
   }
 
   .table-container {

@@ -6,9 +6,9 @@ import {
   MOUSE_SQUARE_LEAVE,
   MOUSE_SUM_ENTER,
   MOUSE_SUM_LEAVE,
-} from "./home.constants";
+} from "./matrix.constants";
 
-export const homeReducer = (state = INITIAL_STATE, action) => {
+export const matrixReducer = (state = INITIAL_STATE, action) => {
   const { type, payload } = action;
   switch (type) {
     case MOUSE_SUM_ENTER:

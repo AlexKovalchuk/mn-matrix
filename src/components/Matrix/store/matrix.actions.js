@@ -5,7 +5,7 @@ import {
   MOUSE_SQUARE_LEAVE,
   MOUSE_SUM_ENTER,
   MOUSE_SUM_LEAVE,
-} from "./home.constants";
+} from "./matrix.constants";
 import {
   getMatrix,
   calculateNumbers,

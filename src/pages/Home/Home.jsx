@@ -1,183 +1,61 @@
 import React, { useEffect, Fragment } from "react";
 import "./home.scss";
 import { connect } from "react-redux";
-import {Table, Button} from "react-bootstrap";
-import {
-  generateMatrix,
-  increaseSquareValue,
-  mouseEnterAction,
-  mouseLeaveAction,
-  mouseEnterSumAction,
-  mouseLeaveSumAction,
-  changeRowAmountToMatrixAction,
-} from "./store/home.actions";
+import { Matrix } from '../../components/Matrix/Matrix';
 
 const HomeComponent = props => {
-  const {
-    home,
-    generateMatrix,
-    increaseSquareValue,
-    mouseEnterAction,
-    mouseLeaveAction,
-    mouseEnterSumAction,
-    mouseLeaveSumAction,
-  } = props;
-  const { matrix, sumAndAverage, M, N } = home;
+  const TestDescription =  (
+      <div className="matrix-tz">
+        *Технические условия: * Входящие параметры:
 
-  useEffect(() => {
-    generateMatrix();
-  }, []);
+        Числа M, N, X
+        <br/>
+        (1) Подготовка: +++
 
-  const sumOnMouseEnterHandler = (index, sum) => {
-    mouseEnterSumAction(index, matrix, sum);
-  };
+        + Создать матрицу M*N (строчки, колонки) - Форма
 
-  const sumOnMouseLeaveSumHandler = () => {
-    mouseLeaveSumAction();
-  };
+        + Значение места пресечения — объект с уникальным идентификатором ID и количеством Amount: int (3-х значный рандом)
 
-  const squareClickHandler = (m, n) => {
-    const { matrix, M, N } = home;
-    matrix[m][n] = matrix[m][n] + 1;
-    console.log('squareClickHandler', matrix, M, N)
-    increaseSquareValue(matrix, M, N)
-  };
+        + Найти сумму по каждой строчке M и среднее по каждому столбику N
+        <br/>
+        (2) Вывод таблицы: +
 
-  const onMouseEnterHandler = (m, n) => {
-    mouseEnterAction(matrix, m, n, M, N);
-  };
+        + Вывести результирующие данные в таблицу с хорошим UX. В основных ячейках таблицы выводится Amount, ранее автоматически сгенерированный, справа сумма по строкам M, снизу — сумма по столбцам N.
+        <br/>
+        (3) Динамика ячеек:+
 
-  const onMouseLeaveHandler = () => {
-    mouseLeaveAction();
-  };
+        + При нажатии на ячейку увеличивать значение Amount на 1 и соответственно менять среднее этого столбика и сумму этой строки
 
-  const hoverClass = (value, rowIndx) => {
-    const { hoverHighlight, hoverSum } = props.home;
+        + При наведении на ячейку подсветить X ячеек, Amount которых самый близкий к Amount текущей ячейки.
 
-    if(hoverSum.rowIndex === rowIndx) return 'highlight-hover';
+        + При наведении на ячейку суммы по строчке необходимо заменять значение ячеек на процент их вклада в общую сумму и добавить фон: столбик, который наглядно покажет величину процента. Фактически закрасить часть ячейки.
+        <br/>
+        (4) Динамика строк: +
 
-    if(!value || !hoverHighlight || !hoverHighlight.isHover || !hoverHighlight.values) return '';
+        +Дать возможность удалить строку с таблицы, при этом должны поменяться средние значения по каждому столбику
 
-    const {nearestValue, nearestValue2} = hoverHighlight.values;
-    if(value === nearestValue || value === nearestValue2) return 'highlight-hover';
-
-  };
-
-  const checkAndChangeMatrixValues = () => {
-    const {matrix, hoverSum} = props.home;
-    const {isSumHovered, rowIndex, percentageValues} = hoverSum;
-    let result = [...matrix];
-    if (isSumHovered) result[rowIndex] = percentageValues;
-    return result;
-  };
-
-  const showValue = (value, rowIndx) => {
-    const { hoverSum } = props.home;
-    if(hoverSum.rowIndex === rowIndx) return `${value} %`;
-    return value;
-  };
-
-  const changeRowAmountHandler = isAdd => {
-    const {changeRowAmountToMatrixAction, home} = props;
-    const {matrix, M, N} = home;
-    const newM = isAdd ? M+1 : M-1;
-    changeRowAmountToMatrixAction(matrix, newM, N, isAdd);
-  };
-
-  const renderTableBody = () => {
-    const { averageN, sumM } = sumAndAverage;
-    const bodyContent = checkAndChangeMatrixValues().map((row, indexM) => {
-      return (
-        <tr key={`table-tr-${indexM}`}>
-          {row.map((el, indexN) => {
-            if(indexN === row.length-1) {
-              let cls = hoverClass(el, indexM);
-              return (
-                <Fragment key={`fragment-square-${indexN}`}>
-                  <td
-                    onMouseEnter={() => onMouseEnterHandler(indexM, indexN)}
-                    onMouseLeave={onMouseLeaveHandler}
-                    className={`table-square ${cls}`}
-                    key={`table-td-${indexN}`}
-                    onClick={() => squareClickHandler(indexM, indexN)}
-                  >{showValue(el, indexM)}</td>
-                  <td
-                    onMouseEnter={() => sumOnMouseEnterHandler(indexM, sumM[indexM])}
-                    onMouseLeave={sumOnMouseLeaveSumHandler}
-                    key={`table-td-${indexN}-sum`}
-                    className="sumValue"
-                  >{sumM[indexM]}</td>
-                </Fragment>
-              )
-            }
-            return (
-              <td
-                onMouseEnter={() => onMouseEnterHandler(indexM, indexN)}
-                onMouseLeave={onMouseLeaveHandler}
-                onClick={() => squareClickHandler(indexM, indexN)}
-                className={`table-square ${hoverClass(el, indexM)}`}
-                key={`table-td-${indexN}`}
-              >{showValue(el, indexM)}</td>
-            );
-          })}
-        </tr>
-      );
-    });
-    const averageRow = averageN.map((val, index) => {
-       return (
-         <td key={`average-row-td-${index}`}>{val}</td>
-       )
-    });
-
-
-    return (
-      <tbody>
-        {bodyContent}
-        <tr className="average-row">{averageRow}</tr>
-      </tbody>
+        +Дать возможность добавить строку, фактически M+1. При этом строка заполняется по всем правилам таблицы."
+      </div>
     );
-  };
 
   return (
     <div className="home-container">
-      <h1 className="home-title">Home</h1>
-      <div className="buttons-container">
-        <Button
-          onClick={() => changeRowAmountHandler(true)}
-          variant="secondary">
-          Add Row
-        </Button>
-        <Button
-          onClick={() => changeRowAmountHandler(false)}
-          variant="danger">
-          Remove Row
-        </Button>
+      <h1 className="home-title">MN-MATRIX</h1>
+
+
+      <div className="home-page-content">
+        <Matrix />
+        {TestDescription}
       </div>
 
-      <div
-        className="table-container">
-        <Table responsive>
-          {renderTableBody()}
-        </Table>
-      </div>
     </div>
   );
 };
 
 const mapStateToProps = state => {
-  return {
-    home: state.home
-  };
+  return {};
 };
 
-const mapDispatchToProps = {
-  generateMatrix,
-  increaseSquareValue,
-  mouseEnterAction,
-  mouseLeaveAction,
-  mouseEnterSumAction,
-  mouseLeaveSumAction,
-  changeRowAmountToMatrixAction,
-};
+const mapDispatchToProps = {};
 
 export const Home = connect(mapStateToProps, mapDispatchToProps)(HomeComponent);

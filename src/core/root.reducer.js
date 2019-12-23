@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 import { carsReducer } from "../pages/Cars/store/cars/cars.reducer";
-import { homeReducer } from "../pages/Home/store/home.reducer";
+import { matrixReducer } from "../components/Matrix/store/matrix.reducer";
 
 export const rootReducer = combineReducers({
   cars: carsReducer,
-  home: homeReducer
+  matrixReducer: matrixReducer
 });
