@@ -76,7 +76,6 @@ export const mouseEnterAction = (matrix, m, n, M, N) => {
 };
 
 export const increaseSquareValue = (matrix, M, N) => {
-  console.log('increaseSquareValue', M, N)
   return dispatch => {
     dispatch({
       type: INCREASE_SQUARE_VALUE,

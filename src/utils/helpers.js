@@ -18,9 +18,11 @@ export const addRow = (matrix, N, isAdd) => {
 
 export const calculatePercentageSums = (matrixRow, sum) => {
   const zero = 0;
-  return matrixRow.map(val => {
+  return matrixRow.map(el => {
     if(sum === 0) return zero.toFixed(2);
-    return (val * 100 / sum).toFixed(2);
+    return {
+      amount: (el.amount * 100 / sum).toFixed(2)
+    }
   })
 };
 
@@ -58,7 +60,12 @@ export const getMatrix = (M, N) => {
   for (let i = 0; i < M; i++) {
     const tmpN = [];
     for (let j = 0; j < N; j++) {
-      tmpN.push(generateRandomValue(100, 999));
+      const squareObject = {
+        id:`${i}${j}`,
+        amount: generateRandomValue(100, 999),
+      }
+      // tmpN.push(generateRandomValue(100, 999));
+      tmpN.push(squareObject);
     }
     matrix.push(tmpN);
   }
@@ -75,19 +82,20 @@ export const calculateNumbers = (matrix, M, N) => {
   for (let i = 0; i < M; i++) {
     let sumM = 0;
     for (let j = 0; j < N; j++) {
-      sumM += matrix[i][j];
+      sumM += matrix[i][j].amount;
     }
-    result.sumM.push(sumM);
+    result.sumM.push({
+      amount: sumM
+    });
   }
 
-  let row;
-  let col;
-  const sumN = matrix[0].slice();
-  for (row = 1; row < matrix.length; row++) {
-    for (col = 0; col < sumN.length; col++) {
-      sumN[col] += matrix[row][col];
+  const sumN = matrix[0].map(el => el.amount);
+  for (let row = 1; row < matrix.length; row++) {
+    for (let col = 0; col < matrix[0].length; col++) {
+      sumN[col] += matrix[row][col].amount;
     }
   }
+
   result.averageN = sumN.map(number => {
     return (number / M).toFixed(2);
   });

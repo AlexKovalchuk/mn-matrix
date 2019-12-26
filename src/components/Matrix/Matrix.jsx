@@ -37,8 +37,7 @@ const MatrixComponent = props => {
 
   const squareClickHandler = (m, n) => {
     const { matrix, M, N } = matrixReducer;
-    matrix[m][n] = matrix[m][n] + 1;
-    console.log('squareClickHandler', matrix, M, N);
+    matrix[m][n].amount = matrix[m][n].amount + 1;
     increaseSquareValue(matrix, M, N)
   };
 
@@ -50,15 +49,15 @@ const MatrixComponent = props => {
     mouseLeaveAction();
   };
 
-  const hoverClass = (value, rowIndx) => {
+  const hoverClass = (el, rowIndx) => {
     const { hoverHighlight, hoverSum } = props.matrixReducer;
 
     if(hoverSum.rowIndex === rowIndx) return 'highlight-hover';
 
-    if(!value || !hoverHighlight || !hoverHighlight.isHover || !hoverHighlight.values) return '';
+    if(!el || !hoverHighlight || !hoverHighlight.isHover || !hoverHighlight.values) return '';
 
     const {nearestValue, nearestValue2} = hoverHighlight.values;
-    if(value === nearestValue || value === nearestValue2) return 'highlight-hover';
+    if(el.amount === nearestValue || el.amount === nearestValue2) return 'highlight-hover';
 
   };
 
@@ -70,10 +69,10 @@ const MatrixComponent = props => {
     return result;
   };
 
-  const showValue = (value, rowIndx) => {
+  const showValue = (el, rowIndx) => {
     const { hoverSum } = props.matrixReducer;
-    if(hoverSum.rowIndex === rowIndx) return `${value} %`;
-    return value;
+    if(hoverSum.rowIndex === rowIndx) return `${el.amount} %`;
+    return el.amount;
   };
 
   const changeRowAmountHandler = isAdd => {
@@ -92,7 +91,7 @@ const MatrixComponent = props => {
             if(indexN === row.length-1) {
               let cls = hoverClass(el, indexM);
               return (
-                <Fragment key={`fragment-square-${indexN}`}>
+                <Fragment key={`fragment-square-${indexN}-${el.id}`}>
                   <td
                     onMouseEnter={() => onMouseEnterHandler(indexM, indexN)}
                     onMouseLeave={onMouseLeaveHandler}
@@ -101,11 +100,11 @@ const MatrixComponent = props => {
                     onClick={() => squareClickHandler(indexM, indexN)}
                   >{showValue(el, indexM)}</td>
                   <td
-                    onMouseEnter={() => sumOnMouseEnterHandler(indexM, sumM[indexM])}
+                    onMouseEnter={() => sumOnMouseEnterHandler(indexM, sumM[indexM].amount)}
                     onMouseLeave={sumOnMouseLeaveSumHandler}
                     key={`table-td-${indexN}-sum`}
                     className="sumValue"
-                  >{sumM[indexM]}</td>
+                  >{sumM[indexM].amount}</td>
                 </Fragment>
               )
             }
