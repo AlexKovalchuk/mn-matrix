@@ -1,4 +1,8 @@
 
+export const generateRandomValue = (min = 100, max = 999) => {
+  return Math.floor(Math.random() * (max - min)) + min
+};
+
 export const addRow = (matrix, N, isAdd) => {
   if(!isAdd) {
     matrix.pop();
@@ -6,7 +10,7 @@ export const addRow = (matrix, N, isAdd) => {
   }
   let newRow = [];
   for (let i = 0; i < N; i++) {
-    newRow.push(0);
+    newRow.push(generateRandomValue(100, 999));
   }
   matrix.push(newRow);
   return matrix;
@@ -54,7 +58,7 @@ export const getMatrix = (M, N) => {
   for (let i = 0; i < M; i++) {
     const tmpN = [];
     for (let j = 0; j < N; j++) {
-      tmpN.push(1);
+      tmpN.push(generateRandomValue(100, 999));
     }
     matrix.push(tmpN);
   }

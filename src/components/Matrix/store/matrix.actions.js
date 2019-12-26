@@ -88,13 +88,14 @@ export const increaseSquareValue = (matrix, M, N) => {
   }
 };
 
-export const generateMatrix = (M = 5, N = 5) => {
+export const generateMatrix = (M = 5, N = 5, X = 5) => {
   return dispatch => {
     dispatch({
       type: GENERATE_MATRIX,
       payload: {
         M,
         N,
+        X,
         matrix: getMatrix(M, N),
         sumAndAverage: calculateNumbers(getMatrix(M, N), M, N)
       }

@@ -1,7 +1,7 @@
 export const INITIAL_STATE = {
   M: 5,
   N: 5,
-  X: 2,
+  X: 5,
   crossPoint: {
     ID: 1,
     Amount: Math.floor(Math.random() * (999 - 100 + 1)) + 100
