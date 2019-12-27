@@ -13,10 +13,7 @@ export const INITIAL_STATE = {
   matrix: [],
   hoverHighlight: {
     isHover: false,
-    values: {
-      nearestValue: null,
-      nearestValue2: null,
-    },
+    values: [],
   },
   hoverSum: {
     percentageValues: [],

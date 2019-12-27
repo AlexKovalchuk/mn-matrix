@@ -26,31 +26,23 @@ export const calculatePercentageSums = (matrixRow, sum) => {
   })
 };
 
-export const nearestValue = (matrix, m, n, M, N) => {
-  const hoveredValue = matrix[m][n];
-  let nearestValue = matrix[0][0];
-  let nearestValue2 = null;
+export const nearestValues = (matrix, m, n, M, N, X) => {
+  const hoveredSquare = matrix[m][n];
+  let arrayOfNearestValuesSquares = []; // length should be equal X
   for(let i = 0; i < M; i++) {
     for(let j = 0; j < N; j++) {
-      const hoveredValueDiff = Math.abs(nearestValue - hoveredValue);
-      const nearestValueDiff = Math.abs(matrix[i][j] - hoveredValue);
-      if(nearestValueDiff < hoveredValueDiff && matrix[i][j] !== hoveredValue) {
-        nearestValue = matrix[i][j];
+      let currSquare = {...matrix[i][j]};
+      currSquare.diff = Math.abs(currSquare.amount - hoveredSquare.amount);
+      if(arrayOfNearestValuesSquares.length < X && currSquare.amount !== hoveredSquare.amount) {
+        arrayOfNearestValuesSquares.push(currSquare);
+      } else if (currSquare.amount !== hoveredSquare.amount) {
+        arrayOfNearestValuesSquares.push(currSquare);
+        arrayOfNearestValuesSquares.sort((a, b) => a.diff - b.diff);
+        arrayOfNearestValuesSquares.pop();
       }
     }
   }
-
-  for(let i = 0; i < M; i++) {
-    for(let j = 0; j < N; j++) {
-      const dif = Math.abs(matrix[i][j] - hoveredValue);
-      const nearestDif = Math.abs(nearestValue - hoveredValue);
-      if(dif === nearestDif && nearestValue !== matrix[i][j]) {
-        nearestValue2 = matrix[i][j]
-      }
-    }
-  }
-
-  return {nearestValue, nearestValue2};
+  return arrayOfNearestValuesSquares;
 };
 
 export const getMatrix = (M, N) => {

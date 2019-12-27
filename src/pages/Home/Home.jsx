@@ -1,9 +1,9 @@
-import React, { useEffect, Fragment } from "react";
+import React from "react";
 import "./home.scss";
 import { connect } from "react-redux";
 import { Matrix } from '../../components/Matrix/Matrix';
 
-const HomeComponent = props => {
+export const Home = props => {
   const TestDescription =  (
       <div className="matrix-tz">
         *Технические условия: * Входящие параметры:
@@ -51,11 +51,3 @@ const HomeComponent = props => {
     </div>
   );
 };
-
-const mapStateToProps = state => {
-  return {};
-};
-
-const mapDispatchToProps = {};
-
-export const Home = connect(mapStateToProps, mapDispatchToProps)(HomeComponent);

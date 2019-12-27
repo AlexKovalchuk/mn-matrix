@@ -21,7 +21,7 @@ const MatrixComponent = props => {
     mouseEnterSumAction,
     mouseLeaveSumAction,
   } = props;
-  const { matrix, sumAndAverage, M, N } = matrixReducer;
+  const { matrix, sumAndAverage, M, N, X } = matrixReducer;
 
   useEffect(() => {
     generateMatrix();
@@ -42,7 +42,7 @@ const MatrixComponent = props => {
   };
 
   const onMouseEnterHandler = (m, n) => {
-    mouseEnterAction(matrix, m, n, M, N);
+    mouseEnterAction(matrix, m, n, M, N, X);
   };
 
   const onMouseLeaveHandler = () => {
@@ -51,14 +51,11 @@ const MatrixComponent = props => {
 
   const hoverClass = (el, rowIndx) => {
     const { hoverHighlight, hoverSum } = props.matrixReducer;
+    if(hoverHighlight.values.length) return hoverHighlight.values.find(value => value.id === el.id) ? 'highlight-hover' : '';
 
     if(hoverSum.rowIndex === rowIndx) return 'highlight-hover';
 
-    if(!el || !hoverHighlight || !hoverHighlight.isHover || !hoverHighlight.values) return '';
-
-    const {nearestValue, nearestValue2} = hoverHighlight.values;
-    if(el.amount === nearestValue || el.amount === nearestValue2) return 'highlight-hover';
-
+    return '';
   };
 
   const checkAndChangeMatrixValues = () => {

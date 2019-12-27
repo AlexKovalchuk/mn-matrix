@@ -9,7 +9,7 @@ import {
 import {
   getMatrix,
   calculateNumbers,
-  nearestValue,
+  nearestValues,
   calculatePercentageSums,
   addRow,
 } from "../../../utils/helpers";
@@ -61,14 +61,14 @@ export const mouseLeaveAction = () => {
   };
 };
 
-export const mouseEnterAction = (matrix, m, n, M, N) => {
+export const mouseEnterAction = (matrix, m, n, M, N, X) => {
   return dispatch => {
     dispatch({
       type: MOUSE_SQUARE_ENTER,
       payload: {
         hoverHighlight: {
           isHover: true,
-          values: nearestValue(matrix, m, n, M, N),
+          values: nearestValues(matrix, m, n, M, N, X),
         }
       }
     });

@@ -3,8 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="df871571-1675-47af-a6fc-1c7c2c671a7c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Matrix/Matrix.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Matrix/Matrix.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Matrix/store/matrix.actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Matrix/store/matrix.actions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Matrix/store/matrix.constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Matrix/store/matrix.constants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Home/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Home/Home.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Home/home.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Home/home.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/helpers.js" afterDir="false" />
     </list>
     <list id="8dceb465-212b-4b5c-a36e-8124e0e2b46a" name="first commit" comment="first commit" />
@@ -23,8 +26,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/Home/home.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="19" column="22" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
+            <state relative-caret-position="648">
+              <caret line="36" column="22" selection-start-line="36" selection-start-column="22" selection-end-line="36" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/Home/Home.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="882">
+              <caret line="52" column="2" selection-start-line="52" selection-start-column="2" selection-end-line="52" selection-end-column="2" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -39,10 +54,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/Home/Home.jsx">
+        <entry file="file://$PROJECT_DIR$/src/components/Matrix/Matrix.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="39" selection-start-line="39" selection-end-line="39" />
+            <state relative-caret-position="747">
+              <caret line="57" column="14" selection-start-line="57" selection-start-column="14" selection-end-line="57" selection-end-column="14" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
               </folding>
@@ -50,11 +65,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/Matrix/store/matrix.actions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="97" column="10" selection-start-line="97" selection-start-column="10" selection-end-line="97" selection-end-column="10" />
+            <state relative-caret-position="570">
+              <caret line="70" column="25" selection-start-line="70" selection-start-column="18" selection-end-line="70" selection-end-column="31" />
               <folding>
                 <element signature="e#0#163#0" expanded="true" />
               </folding>
@@ -62,32 +77,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/Matrix/store/matrix.constants.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="3" column="7" lean-forward="true" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/utils/helpers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="65" column="2" lean-forward="true" selection-start-line="65" selection-start-column="2" selection-end-line="65" selection-end-column="2" />
+            <state relative-caret-position="549">
+              <caret line="44" column="37" selection-start-line="44" selection-start-column="37" selection-end-line="44" selection-end-column="37" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Matrix/Matrix.jsx">
+        <entry file="file://$PROJECT_DIR$/src/components/Matrix/store/matrix.constants.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="116">
-              <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
-              <folding>
-                <element signature="e#0#51#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="270">
+              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -104,15 +107,10 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>.component-container</find>
-      <find>skysoft-react-boilerplate</find>
-      <find>carsReducer</find>
-      <find>mapStateToProps</find>
       <find>sum</find>
       <find>HomePage/store</find>
       <find>matrix</find>
       <find>generateMatrix</find>
-      <find>onMouseEnterHandler</find>
       <find>result</find>
       <find>mouseEnterSumAction</find>
       <find>changeRowAmountRow</find>
@@ -127,6 +125,18 @@
       <find>home.reducer</find>
       <find>matrix-tz</find>
       <find>home</find>
+      <find>checkAndChangeMatrixValues</find>
+      <find>el</find>
+      <find>showValue</find>
+      <find>sumM</find>
+      <find>row</find>
+      <find>console</find>
+      <find>sumAndAverage</find>
+      <find>onMouseEnterHandler</find>
+      <find>pop</find>
+      <find>nearestValue</find>
+      <find>hoverClass</find>
+      <find>nearestValues</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -152,16 +162,16 @@
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/components/TaskDescription/Matrix.jsx" />
         <option value="$PROJECT_DIR$/src/components/TaskDescription/TaskDescription" />
-        <option value="$PROJECT_DIR$/src/pages/Home/home.scss" />
         <option value="$PROJECT_DIR$/src/components/Matrix/store/home.reducer.js" />
         <option value="$PROJECT_DIR$/src/components/Matrix/store/matrix.reducer.js" />
         <option value="$PROJECT_DIR$/src/core/root.reducer.js" />
-        <option value="$PROJECT_DIR$/src/components/Matrix/Matrix.jsx" />
-        <option value="$PROJECT_DIR$/src/pages/Home/Home.jsx" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/utils/helpers.js" />
         <option value="$PROJECT_DIR$/src/components/Matrix/store/matrix.actions.js" />
         <option value="$PROJECT_DIR$/src/components/Matrix/store/matrix.constants.js" />
+        <option value="$PROJECT_DIR$/src/pages/Home/home.scss" />
+        <option value="$PROJECT_DIR$/src/components/Matrix/Matrix.jsx" />
+        <option value="$PROJECT_DIR$/src/pages/Home/Home.jsx" />
+        <option value="$PROJECT_DIR$/src/utils/helpers.js" />
       </list>
     </option>
   </component>
@@ -405,7 +415,9 @@
       <workItem from="1577085732791" duration="1562000" />
       <workItem from="1577089070405" duration="30060000" />
       <workItem from="1577173961327" duration="597000" />
-      <workItem from="1577344599750" duration="1494000" />
+      <workItem from="1577344599750" duration="9842000" />
+      <workItem from="1577395252696" duration="25000" />
+      <workItem from="1577444489060" duration="784000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1576672106807</created>
@@ -484,17 +496,31 @@
       <option name="project" value="LOCAL" />
       <updated>1577354006933</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Random values, added X value in generate Matrix">
+      <created>1577355800470</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1577355800470</updated>
+    </task>
+    <task id="LOCAL-00013" summary="edited square value format: from number to object = {amount, id}">
+      <created>1577364597007</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1577364597007</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53813000" />
+    <option name="totallyTimeSpent" value="62970000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="6" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4969325" visible="true" weight="0.24947146" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4969325" visible="true" weight="0.18393235" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" sideWeight="0.5030675" side_tool="true" weight="0.24947146" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -529,7 +555,9 @@
     <MESSAGE value="nvmrc rollback" />
     <MESSAGE value="Cleared code" />
     <MESSAGE value="edit git ignor" />
-    <option name="LAST_COMMIT_MESSAGE" value="edit git ignor" />
+    <MESSAGE value="Random values, added X value in generate Matrix" />
+    <MESSAGE value="edited square value format: from number to object = {amount, id}" />
+    <option name="LAST_COMMIT_MESSAGE" value="edited square value format: from number to object = {amount, id}" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/config/jest/cssTransform.js" />
@@ -666,13 +694,6 @@
     <entry file="file://$PROJECT_DIR$/src/components/AppRoutes.jsx">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/Home/home.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="19" column="22" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
@@ -690,12 +711,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/TaskDescription/TaskDescription">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="15" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/Home/home.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="648">
+          <caret line="36" column="22" selection-start-line="36" selection-start-column="22" selection-end-line="36" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/Home/Home.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="39" selection-start-line="39" selection-end-line="39" />
+        <state relative-caret-position="882">
+          <caret line="52" column="2" selection-start-line="52" selection-start-column="2" selection-end-line="52" selection-end-column="2" />
           <folding>
-            <element signature="e#0#51#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -707,44 +742,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Matrix/store/matrix.constants.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/helpers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="549">
+          <caret line="44" column="37" selection-start-line="44" selection-start-column="37" selection-end-line="44" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Matrix/Matrix.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
+        <state relative-caret-position="747">
+          <caret line="57" column="14" selection-start-line="57" selection-start-column="14" selection-end-line="57" selection-end-column="14" />
           <folding>
             <element signature="e#0#51#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/TaskDescription/TaskDescription">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="15" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/helpers.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="65" column="2" lean-forward="true" selection-start-line="65" selection-start-column="2" selection-end-line="65" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Matrix/store/matrix.actions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="97" column="10" selection-start-line="97" selection-start-column="10" selection-end-line="97" selection-end-column="10" />
+        <state relative-caret-position="570">
+          <caret line="70" column="25" selection-start-line="70" selection-start-column="18" selection-end-line="70" selection-end-column="31" />
           <folding>
             <element signature="e#0#163#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Matrix/store/matrix.constants.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="7" lean-forward="true" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
         </state>
       </provider>
     </entry>
