@@ -12,6 +12,7 @@ import {
   nearestValues,
   calculatePercentageSums,
   addRow,
+  changeSumAndAverage,
 } from "../../../utils/helpers";
 
 export const mouseLeaveSumAction = () => {
@@ -75,13 +76,16 @@ export const mouseEnterAction = (matrix, m, n, M, N, X) => {
   }
 };
 
-export const increaseSquareValue = (matrix, M, N) => {
+// export const increaseSquareValue = (matrix, M, N) => {
+export const increaseSquareValue = (matrix, sumAndAverage, M, N, m, n) => {
+  console.log('action', matrix, sumAndAverage);
   return dispatch => {
     dispatch({
       type: INCREASE_SQUARE_VALUE,
       payload: {
         matrix: matrix,
-        sumAndAverage: calculateNumbers(matrix, M, N)
+        sumAndAverage: changeSumAndAverage(matrix, sumAndAverage, M, N, m, n),
+        // sumAndAverage: calculateNumbers(matrix, M, N)
       }
     })
   }

@@ -55,13 +55,26 @@ export const getMatrix = (M, N) => {
       const squareObject = {
         id:`${i}${j}`,
         amount: generateRandomValue(100, 999),
-      }
-      // tmpN.push(generateRandomValue(100, 999));
+        // amount: 1,
+      };
       tmpN.push(squareObject);
     }
     matrix.push(tmpN);
   }
   return matrix;
+};
+
+export const changeSumAndAverage = (matrix, sumAndAverage, M, N, m, n) => {
+  const result = {...sumAndAverage};
+  console.log('sumAndAverage start', result);
+  if (!M || !N) return result;
+  let sumM = {amount: 0};
+  matrix[m].forEach(sq => sumM.amount += sq.amount);
+  let tmpColSum = 0;
+  matrix.forEach(row => tmpColSum += row[n].amount);
+  result.sumM[m] = sumM;
+  result.averageN[n] = (tmpColSum / M).toFixed(2);
+  return result;
 };
 
 export const calculateNumbers = (matrix, M, N) => {

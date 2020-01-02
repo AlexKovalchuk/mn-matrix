@@ -36,9 +36,10 @@ const MatrixComponent = props => {
   };
 
   const squareClickHandler = (m, n) => {
-    const { matrix, M, N } = matrixReducer;
+    const { matrix, M, N, sumAndAverage,  } = matrixReducer;
     matrix[m][n].amount = matrix[m][n].amount + 1;
-    increaseSquareValue(matrix, M, N)
+    increaseSquareValue(matrix, sumAndAverage, M, N, m, n)
+    // increaseSquareValue(matrix, M, N)
   };
 
   const onMouseEnterHandler = (m, n) => {
