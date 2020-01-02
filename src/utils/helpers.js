@@ -66,7 +66,6 @@ export const getMatrix = (M, N) => {
 
 export const changeSumAndAverage = (matrix, sumAndAverage, M, N, m, n) => {
   const result = {...sumAndAverage};
-  console.log('sumAndAverage start', result);
   if (!M || !N) return result;
   let sumM = {amount: 0};
   matrix[m].forEach(sq => sumM.amount += sq.amount);
