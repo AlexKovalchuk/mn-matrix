@@ -11,7 +11,7 @@ import {
   calculateNumbers,
   nearestValues,
   calculatePercentageSums,
-  addRow,
+  changeRowAmount,
   changeSumAndAverage,
 } from "../../../utils/helpers";
 
@@ -106,7 +106,7 @@ export const generateMatrix = (M = 5, N = 5, X = 5) => {
 
 export const changeRowAmountToMatrixAction = (matrix, M, N, isAdd) => {
   return dispatch => {
-    const newMatrix = addRow(matrix, N, isAdd);
+    const newMatrix = changeRowAmount(matrix, M, N, isAdd);
     dispatch({
       type: GENERATE_MATRIX,
       payload: {

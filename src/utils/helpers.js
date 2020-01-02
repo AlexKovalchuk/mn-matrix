@@ -3,14 +3,19 @@ export const generateRandomValue = (min = 100, max = 999) => {
   return Math.floor(Math.random() * (max - min)) + min
 };
 
-export const addRow = (matrix, N, isAdd) => {
+export const changeRowAmount = (matrix, M, N, isAdd) => {
   if(!isAdd) {
     matrix.pop();
     return matrix;
   }
   let newRow = [];
   for (let i = 0; i < N; i++) {
-    newRow.push(generateRandomValue(100, 999));
+    const squareObject = {
+      id:`${M}${i}`,
+      amount: generateRandomValue(100, 999),
+      // amount: 1,
+    };
+    newRow.push(squareObject);
   }
   matrix.push(newRow);
   return matrix;
