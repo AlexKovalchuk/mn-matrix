@@ -64,9 +64,9 @@ const MatrixComponent = props => {
 
   const changeRowAmountHandler = isAdd => {
     const {changeRowAmountToMatrixAction, matrixReducer} = props;
-    const {matrix, M, N, sumAndAverage} = matrixReducer;
+    const {matrix, M, N} = matrixReducer;
     const newM = isAdd ? M+1 : M-1;
-    changeRowAmountToMatrixAction(matrix, newM, N, isAdd, sumAndAverage.sumM);
+    changeRowAmountToMatrixAction(matrix, newM, N, isAdd);
   };
 
   const renderTableBody = () => {

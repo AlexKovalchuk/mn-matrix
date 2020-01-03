@@ -111,9 +111,10 @@ export const generateMatrix = (M = 5, N = 5, X = 5) => {
   };
 };
 
-export const changeRowAmountToMatrixAction = (matrix, M, N, isAdd, sumM) => {
+export const changeRowAmountToMatrixAction = (matrix, M, N, isAdd) => {
   return dispatch => {
     const newMatrix = changeRowAmount(matrix, M, N, isAdd);
+    const sumAndAverage = calculateNumbers(newMatrix, M, N);
     dispatch({
       type: GENERATE_MATRIX,
       payload: {
@@ -122,7 +123,7 @@ export const changeRowAmountToMatrixAction = (matrix, M, N, isAdd, sumM) => {
         matrix: newMatrix,
         sumAndAverage: calculateNumbers(newMatrix, M, N),
         hoverSum: {
-          percentageMatrixValues : calculatePercentageMatrixSums(newMatrix, sumM),
+          percentageMatrixValues : calculatePercentageMatrixSums(newMatrix, sumAndAverage.sumM),
           rowIndex: null,
           isSumHovered: false,
         }
