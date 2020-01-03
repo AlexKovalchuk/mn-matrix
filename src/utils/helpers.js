@@ -22,8 +22,6 @@ export const changeRowAmount = (matrix, M, N, isAdd) => {
 
 export const calculatePercentageMatrixSums = (matrix, sumArr) => {
   const resultSumArray = [];
-  console.log('matrix', matrix);
-  console.log('sumArr', sumArr);
   matrix.forEach((row, rowIndex) => {
     let tmpPercentageArr = [];
     row.forEach(el => {
