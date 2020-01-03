@@ -80,7 +80,6 @@ export const increaseSquareValue = (matrix, sumAndAverage, M, N, m, n) => {
         matrix: matrix,
         sumAndAverage: changeSumAndAverage(matrix, sumAndAverage, M, N, m, n),
         hoverSum: {
-          // percentageValues: calculatePercentageSums(matrix[index], sum), // edit: calculate when click on square and generate matrix.
           percentageMatrixValues : calculatePercentageMatrixSums(matrix, sumAndAverage.sumM),
           rowIndex: null,
           isSumHovered: false,
