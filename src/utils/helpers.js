@@ -13,12 +13,25 @@ export const changeRowAmount = (matrix, M, N, isAdd) => {
     const squareObject = {
       id:`${M}${i}`,
       amount: generateRandomValue(100, 999),
-      // amount: 1,
     };
     newRow.push(squareObject);
   }
   matrix.push(newRow);
   return matrix;
+};
+
+export const calculatePercentageMatrixSums = (matrix, sumArr) => {
+  const resultSumArray = [];
+  console.log('matrix', matrix);
+  console.log('sumArr', sumArr);
+  matrix.forEach((row, rowIndex) => {
+    let tmpPercentageArr = [];
+    row.forEach(el => {
+      if(sumArr[rowIndex]) tmpPercentageArr.push({amount: (el.amount * 100 / sumArr[rowIndex].amount).toFixed(2)})
+    });
+    resultSumArray.push(tmpPercentageArr);
+  });
+  return resultSumArray;
 };
 
 export const calculatePercentageSums = (matrixRow, sum) => {
@@ -33,7 +46,7 @@ export const calculatePercentageSums = (matrixRow, sum) => {
 
 export const nearestValues = (matrix, m, n, M, N, X) => {
   const hoveredSquare = matrix[m][n];
-  let arrayOfNearestValuesSquares = []; // length should be equal X
+  let arrayOfNearestValuesSquares = [];
   for(let i = 0; i < M; i++) {
     for(let j = 0; j < N; j++) {
       let currSquare = {...matrix[i][j]};
@@ -60,7 +73,6 @@ export const getMatrix = (M, N) => {
       const squareObject = {
         id:`${i}${j}`,
         amount: generateRandomValue(100, 999),
-        // amount: 1,
       };
       tmpN.push(squareObject);
     }

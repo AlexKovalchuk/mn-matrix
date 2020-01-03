@@ -13,6 +13,7 @@ export const matrixReducer = (state = INITIAL_STATE, action) => {
   switch (type) {
     case MOUSE_SUM_ENTER:
     case MOUSE_SUM_LEAVE:
+      return {...state, hoverSum: {...state.hoverSum, ...payload.hoverSum}};
     case MOUSE_SQUARE_LEAVE:
     case MOUSE_SQUARE_ENTER:
     case GENERATE_MATRIX:

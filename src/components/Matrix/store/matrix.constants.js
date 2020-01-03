@@ -17,6 +17,7 @@ export const INITIAL_STATE = {
   },
   hoverSum: {
     percentageValues: [],
+    percentageMatrixValues: [],
     rowIndex: null,
     isSumHovered: false,
   }

@@ -13,6 +13,7 @@ import {
   calculatePercentageSums,
   changeRowAmount,
   changeSumAndAverage,
+  calculatePercentageMatrixSums,
 } from "../../../utils/helpers";
 
 export const mouseLeaveSumAction = () => {
@@ -21,7 +22,6 @@ export const mouseLeaveSumAction = () => {
       type: MOUSE_SUM_LEAVE,
       payload: {
         hoverSum: {
-          percentageValues: [],
           rowIndex: null,
           isSumHovered: false,
         }
@@ -30,13 +30,12 @@ export const mouseLeaveSumAction = () => {
   }
 };
 
-export const mouseEnterSumAction = (index, matrix, sum) => {
+export const mouseEnterSumAction = (index) => {
   return dispatch => {
     dispatch({
       type: MOUSE_SUM_ENTER,
       payload: {
         hoverSum: {
-          percentageValues: calculatePercentageSums(matrix[index], sum),
           rowIndex: index,
           isSumHovered: true,
         }
@@ -52,10 +51,7 @@ export const mouseLeaveAction = () => {
       payload: {
         hoverHighlight: {
           isHover: false,
-          values: {
-            nearestValue: null,
-            nearestValue2: null,
-          },
+          values: [],
         }
       }
     });
@@ -83,6 +79,12 @@ export const increaseSquareValue = (matrix, sumAndAverage, M, N, m, n) => {
       payload: {
         matrix: matrix,
         sumAndAverage: changeSumAndAverage(matrix, sumAndAverage, M, N, m, n),
+        hoverSum: {
+          // percentageValues: calculatePercentageSums(matrix[index], sum), // edit: calculate when click on square and generate matrix.
+          percentageMatrixValues : calculatePercentageMatrixSums(matrix, sumAndAverage.sumM),
+          rowIndex: null,
+          isSumHovered: false,
+        }
       }
     })
   }
@@ -90,6 +92,7 @@ export const increaseSquareValue = (matrix, sumAndAverage, M, N, m, n) => {
 
 export const generateMatrix = (M = 5, N = 5, X = 5) => {
   const generatedMatrix = getMatrix(M, N);
+  const sumAndAverage = calculateNumbers(generatedMatrix, M, N);
   return dispatch => {
     dispatch({
       type: GENERATE_MATRIX,
@@ -98,13 +101,18 @@ export const generateMatrix = (M = 5, N = 5, X = 5) => {
         N,
         X,
         matrix: generatedMatrix,
-        sumAndAverage: calculateNumbers(generatedMatrix, M, N)
+        sumAndAverage: sumAndAverage,
+        hoverSum: {
+          percentageMatrixValues : calculatePercentageMatrixSums(generatedMatrix, sumAndAverage.sumM),
+          rowIndex: null,
+          isSumHovered: false,
+        }
       }
     });
   };
 };
 
-export const changeRowAmountToMatrixAction = (matrix, M, N, isAdd) => {
+export const changeRowAmountToMatrixAction = (matrix, M, N, isAdd, sumM) => {
   return dispatch => {
     const newMatrix = changeRowAmount(matrix, M, N, isAdd);
     dispatch({
@@ -113,7 +121,12 @@ export const changeRowAmountToMatrixAction = (matrix, M, N, isAdd) => {
         M,
         N,
         matrix: newMatrix,
-        sumAndAverage: calculateNumbers(newMatrix, M, N)
+        sumAndAverage: calculateNumbers(newMatrix, M, N),
+        hoverSum: {
+          percentageMatrixValues : calculatePercentageMatrixSums(newMatrix, sumM),
+          rowIndex: null,
+          isSumHovered: false,
+        }
       }
     });
   };

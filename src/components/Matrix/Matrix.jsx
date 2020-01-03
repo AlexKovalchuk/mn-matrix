@@ -27,43 +27,32 @@ const MatrixComponent = props => {
     generateMatrix();
   }, []);
 
-  const sumOnMouseEnterHandler = (index, sum) => {
-    mouseEnterSumAction(index, matrix, sum);
-  };
+  const sumOnMouseEnterHandler = index => mouseEnterSumAction(index);
 
-  const sumOnMouseLeaveSumHandler = () => {
-    mouseLeaveSumAction();
-  };
+  const sumOnMouseLeaveSumHandler = () => mouseLeaveSumAction();
 
   const squareClickHandler = (m, n) => {
     const { matrix, M, N, sumAndAverage,  } = matrixReducer;
     matrix[m][n].amount = matrix[m][n].amount + 1;
     increaseSquareValue(matrix, sumAndAverage, M, N, m, n)
-    // increaseSquareValue(matrix, M, N)
   };
 
-  const onMouseEnterHandler = (m, n) => {
-    mouseEnterAction(matrix, m, n, M, N, X);
-  };
+  const onMouseEnterHandler = (m, n) => mouseEnterAction(matrix, m, n, M, N, X);
 
-  const onMouseLeaveHandler = () => {
-    mouseLeaveAction();
-  };
+  const onMouseLeaveHandler = () => mouseLeaveAction();
 
   const hoverClass = (el, rowIndx) => {
     const { hoverHighlight, hoverSum } = props.matrixReducer;
     if(hoverHighlight.values.length) return hoverHighlight.values.find(value => value.id === el.id) ? 'highlight-hover' : '';
-
     if(hoverSum.rowIndex === rowIndx) return 'highlight-hover';
-
     return '';
   };
 
   const checkAndChangeMatrixValues = () => {
     const {matrix, hoverSum} = props.matrixReducer;
-    const {isSumHovered, rowIndex, percentageValues} = hoverSum;
+    const {isSumHovered, rowIndex, percentageMatrixValues} = hoverSum;
     let result = [...matrix];
-    if (isSumHovered) result[rowIndex] = percentageValues;
+    if (isSumHovered) result[rowIndex] = percentageMatrixValues[rowIndex];
     return result;
   };
 
@@ -75,9 +64,9 @@ const MatrixComponent = props => {
 
   const changeRowAmountHandler = isAdd => {
     const {changeRowAmountToMatrixAction, matrixReducer} = props;
-    const {matrix, M, N} = matrixReducer;
+    const {matrix, M, N, sumAndAverage} = matrixReducer;
     const newM = isAdd ? M+1 : M-1;
-    changeRowAmountToMatrixAction(matrix, newM, N, isAdd);
+    changeRowAmountToMatrixAction(matrix, newM, N, isAdd, sumAndAverage.sumM);
   };
 
   const renderTableBody = () => {
@@ -98,7 +87,7 @@ const MatrixComponent = props => {
                     onClick={() => squareClickHandler(indexM, indexN)}
                   >{showValue(el, indexM)}</td>
                   <td
-                    onMouseEnter={() => sumOnMouseEnterHandler(indexM, sumM[indexM].amount)}
+                    onMouseEnter={() => sumOnMouseEnterHandler(indexM)}
                     onMouseLeave={sumOnMouseLeaveSumHandler}
                     key={`table-td-${indexN}-sum`}
                     className="sumValue"
