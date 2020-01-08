@@ -45,7 +45,7 @@ export const Home = props => {
 
       <div className="home-page-content">
         <Matrix />
-        {/*{TestDescription}*/}
+        {TestDescription}
       </div>
 
     </div>
