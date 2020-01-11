@@ -38,6 +38,100 @@ export const Home = props => {
       </div>
     );
 
+  function solution(A) {
+    // write your code in JavaScript (Node.js 8.9.4)
+    if(A.length < 3) return 0;
+
+    const sorted = A.sort();
+    const length = A.length;
+    const right = sorted[length-1] * sorted[length-2] * sorted[length-3];
+    const left = sorted[0] * sorted[1] * sorted[length-1];
+    const result = right > left ? right : left;
+    console.log('right', right)
+    console.log('left', left)
+    return result
+  }
+
+  const dna = () => {
+    const codeDNA = {
+      A: 1,
+      C: 2,
+      G: 3,
+      T: 4
+    }
+  }
+  console.log('CAGCCTA'.substring(2,5));
+
+  function solution2(A) {
+    // write your code in JavaScript (Node.js 8.9.4)
+    const peaksValuesArray = [];
+    const length = A.length;
+    for(let i = 1; i < length-1; i++) {
+      if(A[i-1] < A[i] && A[i] > A[i+1]) peaksValuesArray.push(A[i])
+    }
+    return peaksValuesArray.length
+  }
+
+
+
+  function solution3(A) {
+    let peaks = [];
+
+    for (let i = 1; i < A.length - 1; i++) {
+      if (A[i] > A[i - 1] && A[i] > A[i + 1]) {
+        peaks.push(i);
+      }
+    }
+
+    let n = peaks.length;
+    if (n <= 2) {
+      return n;
+    }
+
+    let maxFlags = Math.min(n, Math.ceil(Math.sqrt(A.length)));
+    let distance = maxFlags;
+    let rightPeak = peaks[n - 1];
+
+    for (let k = maxFlags - 2; k > 0; k--) {
+      let flags = k;
+      let leftPeak = peaks[0];
+
+      for (let i = 1; i <= n - 2; i++) {
+        if (peaks[i] - leftPeak >= distance && rightPeak - peaks[i] >= distance) {
+          if (flags === 1) {
+            return k + 2;
+          }
+
+          flags--;
+          leftPeak = peaks[i];
+        }
+
+        if (rightPeak - peaks[i] <= flags * (distance + 1)) {
+          break;
+        }
+      }
+
+      if (flags === 0) {
+        return k + 2;
+      }
+
+      distance--;
+    }
+
+    return n;
+  }
+
+  console.log(solution2([1, 2, 3, 4, 3, 4, 1, 2, 3, 4, 6, 2]))
+  console.log(solution2([1,5,3,4,3,4,1,2,3,4,6,2]))
+  console.log(solution2([7, 10, 4, 5, 7, 4, 6, 1, 4, 3, 3, 7]))
+  console.log(solution2([1, 4, 6, 8]))
+  console.log('-------')
+  console.log(solution3([1, 2, 3, 4, 3, 4, 1, 2, 3, 4, 6, 2]))
+  console.log(solution3([1,5,3,4,3,4,1,2,3,4,6,2]))
+  console.log(solution3([7, 10, 4, 5, 7, 4, 6, 1, 4, 3, 3, 7]))
+  console.log(solution3([1, 4, 6, 8]))
+
+
   return (
     <div className="home-container">
       <h1 className="home-title">MN-MATRIX</h1>

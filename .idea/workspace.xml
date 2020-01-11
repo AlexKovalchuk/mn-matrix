@@ -39,8 +39,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pages/Home/Home.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="477">
-              <caret line="42" column="47" lean-forward="true" selection-start-line="42" selection-start-column="47" selection-end-line="42" selection-end-column="47" />
+            <state relative-caret-position="451">
+              <caret line="115" column="7" selection-start-line="115" selection-start-column="7" selection-end-line="115" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -200,7 +200,7 @@
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
     <option name="width" value="1440" />
     <option name="height" value="900" />
   </component>
@@ -211,108 +211,14 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="Scope">
-        <subPane subId="Scope 'Default Changelist'; set:Default Changelist; class com.intellij.packageDependencies.ChangeListScope">
-          <expand>
-            <path>
-              <item name="mn-matrix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/Documents/Work/Projects/mn-matrix" type="442cc68d:ScopeViewTreeModel$RootNode" />
-            </path>
-            <path>
-              <item name="mn-matrix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/Documents/Work/Projects/mn-matrix" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="public" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="mn-matrix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/Documents/Work/Projects/mn-matrix" type="442cc68d:ScopeViewTreeModel$RootNode" />
-            </path>
-            <path>
-              <item name="mn-matrix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/Documents/Work/Projects/mn-matrix" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="public" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="mn-matrix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mn-matrix" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mn-matrix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mn-matrix" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mn-matrix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mn-matrix" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mn-matrix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mn-matrix" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="Matrix" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mn-matrix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mn-matrix" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="Matrix" type="462c0819:PsiDirectoryNode" />
-              <item name="store" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mn-matrix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mn-matrix" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="TaskDescription" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mn-matrix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mn-matrix" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mn-matrix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mn-matrix" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mn-matrix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mn-matrix" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="Home" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/Matrix" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -437,7 +343,10 @@
       <workItem from="1578124260053" duration="298000" />
       <workItem from="1578158470549" duration="165000" />
       <workItem from="1578473946686" duration="877000" />
-      <workItem from="1578483897321" duration="491000" />
+      <workItem from="1578483897321" duration="571000" />
+      <workItem from="1578650937696" duration="184000" />
+      <workItem from="1578659680415" duration="3222000" />
+      <workItem from="1578732464984" duration="393000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1576672106807</created>
@@ -572,11 +481,18 @@
       <option name="project" value="LOCAL" />
       <updated>1578052561105</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="return desc">
+      <created>1578502352287</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1578502352287</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78003000" />
+    <option name="totallyTimeSpent" value="81882000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -646,7 +562,8 @@
     <MESSAGE value="Removed comments" />
     <MESSAGE value="Edited add/remove row action" />
     <MESSAGE value="removed comment" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed comment" />
+    <MESSAGE value="return desc" />
+    <option name="LAST_COMMIT_MESSAGE" value="return desc" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/config/jest/cssTransform.js" />
@@ -861,8 +778,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/Home/Home.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="477">
-          <caret line="42" column="47" lean-forward="true" selection-start-line="42" selection-start-column="47" selection-end-line="42" selection-end-column="47" />
+        <state relative-caret-position="451">
+          <caret line="115" column="7" selection-start-line="115" selection-start-column="7" selection-end-line="115" selection-end-column="7" />
         </state>
       </provider>
     </entry>
