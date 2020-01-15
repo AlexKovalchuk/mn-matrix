@@ -2,10 +2,10 @@ import React, { useEffect, Fragment } from 'react';
 import { connect } from "react-redux";
 
 const LampaComponent = props => {
-  const { lampaReducer } = props
+  const { lampaReducer } = props;
   useEffect(() => {
     console.log('lampaReducer', lampaReducer);
-  }, [lampaReducer])
+  }, [lampaReducer]);
 
   return (
     <div className='lampa-page-container'>
@@ -20,6 +20,6 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {};
 
 export const Lampa = connect(mapStateToProps, mapDispatchToProps)(LampaComponent);
