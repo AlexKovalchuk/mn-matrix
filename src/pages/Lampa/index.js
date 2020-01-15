@@ -1,0 +1,1 @@
+export { Lampa } from './Lampa';

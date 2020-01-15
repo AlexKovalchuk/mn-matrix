@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { routes } from "config";
+import { routes } from "../config";
 
 import "./Navigation.scss";
 import Logo from "assets/images/logo.svg";
@@ -17,6 +17,12 @@ export const Navigation = () => (
         <ul className="site-navigation">
           <li>
             <Link to={routes.home}>Home</Link>
+          </li>
+          <li>
+            <Link to={routes.lampa}>Lampa</Link>
+          </li>
+          <li>
+            <Link to={routes.matrix}>Matrix</Link>
           </li>
           <li>
             <Link to={routes.cars}>Cars</Link>
